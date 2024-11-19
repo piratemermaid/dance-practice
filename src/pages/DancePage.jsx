@@ -1,8 +1,8 @@
 import {
   Box,
   Center,
+  Flex,
   Image,
-  SimpleGrid,
   Table,
   Td,
   Text,
@@ -23,14 +23,6 @@ export default function DancePage() {
   const danceName = location.pathname.split('/dance/').pop();
 
   const danceInfo = dances[danceName.toLowerCase()];
-
-  const getColumns = (step) => {
-    let columns = 1;
-    if (step.gifName) columns++;
-    if (step.footwork?.length) columns++;
-
-    return columns;
-  };
 
   return (
     <PageLayout title={danceName}>
@@ -54,26 +46,35 @@ export default function DancePage() {
               <Text key={index}>- {note}</Text>
             ))}
           </Box>
-          <SimpleGrid columns={getColumns(step)} spacing={10}>
+          <Flex gap="10" wrap="wrap" justifyContent="center">
             {step.footwork?.length && (
-              <Table>
-                {step.footwork.map((step, index) => (
-                  <Tr key={index}>
-                    <Th>{step.count}</Th>
-                    <Td>{step.direction}</Td>
-                    <Td>{step.foot ? `${step.foot} foot` : ''}</Td>
-                    <Td>{step.technique ? `(${step.technique})` : null}</Td>
-                  </Tr>
-                ))}
-              </Table>
+              <Box>
+                <Table>
+                  {step.footwork.map((step, index) => (
+                    <Tr key={index}>
+                      <Th>{step.count}</Th>
+                      <Td>{step.direction}</Td>
+                      <Td>{step.foot ? `${step.foot} foot` : ''}</Td>
+                      <Td>{step.technique ? `(${step.technique})` : null}</Td>
+                    </Tr>
+                  ))}
+                </Table>
+              </Box>
             )}
-            <Center sx={{ my: 4 }}>
-              <YoutubeVideo url={step.videoUrl} />
-            </Center>
+            <Box>
+              <Center sx={{ my: 4 }}>
+                <YoutubeVideo url={step.videoUrl} />
+              </Center>
+            </Box>
             {step.gifName && (
-              <Image src={`/images/gifs/${step.gifName}.gif`} alt={step.name} />
+              <Box sx={{ maxWidth: '200px' }}>
+                <Image
+                  src={`/images/gifs/${step.gifName}.gif`}
+                  alt={step.name}
+                />
+              </Box>
             )}
-          </SimpleGrid>
+          </Flex>
         </Section>
       ))}
     </PageLayout>
