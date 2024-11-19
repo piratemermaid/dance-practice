@@ -37,13 +37,13 @@ export default function DancePage() {
       <Section>
         <SectionHeader>Frame</SectionHeader>
         <Box>
-          {danceInfo.frame.map((frameNote, index) => (
+          {danceInfo.frame?.map((frameNote, index) => (
             <Text key={index}>{frameNote}</Text>
           ))}
         </Box>
       </Section>
 
-      {danceInfo.steps.map((step, index) => (
+      {danceInfo.steps?.map((step, index) => (
         <Section key={index}>
           <SectionHeader>{step.name}</SectionHeader>
           <Box>

@@ -1,3 +1,4 @@
+import rumba from './rumba';
 import waltz from './waltz';
 
-export default { waltz };
+export default { rumba, waltz };
