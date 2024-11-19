@@ -41,11 +41,40 @@ export default function DancePage() {
           {step.description && (
             <Text sx={{ color: 'purple.100' }}>{step.description}</Text>
           )}
-          <Box>
-            {step.notes?.map((note, index) => (
-              <Text key={index}>- {note}</Text>
-            ))}
-          </Box>
+          {step.technique?.length && (
+            <Box>
+              <Text
+                sx={{
+                  fontSize: 16,
+                  textTransform: 'uppercase',
+                  fontWeight: 300,
+                  color: 'blue.200',
+                }}
+              >
+                Technique
+              </Text>
+              {step.technique.map((technique, index) => (
+                <Text key={index}>- {technique}</Text>
+              ))}
+            </Box>
+          )}
+          {step.notes?.length && (
+            <Box>
+              <Text
+                sx={{
+                  fontSize: 16,
+                  textTransform: 'uppercase',
+                  fontWeight: 300,
+                  color: 'blue.200',
+                }}
+              >
+                Notes
+              </Text>
+              {step.notes.map((note, index) => (
+                <Text key={index}>- {note}</Text>
+              ))}
+            </Box>
+          )}
           <Flex gap="10" wrap="wrap" justifyContent="center">
             {step.footwork?.length && (
               <Box>
