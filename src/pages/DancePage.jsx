@@ -53,6 +53,7 @@ export default function DancePage() {
                   {step.footwork.map((step, index) => (
                     <Tr key={index}>
                       <Th>{step.count}</Th>
+                      {step.countDesc && <Th>{step.countDesc}</Th>}
                       <Td>{step.direction}</Td>
                       <Td>{step.foot ? `${step.foot} foot` : ''}</Td>
                       <Td>{step.technique ? `(${step.technique})` : null}</Td>
