@@ -1,16 +1,15 @@
-import PageOne from '../pages/PageOne';
-import PageTwo from '../pages/PageTwo';
+import DancePage from '../pages/DancePage';
+import HomePage from '../pages/HomePage';
 
 const ROUTES = [
   {
-    label: 'Page One',
-    path: '/one',
-    Component: PageOne,
+    label: 'Home',
+    path: '/',
+    Component: HomePage,
   },
   {
-    label: 'Page Two',
-    path: '/two',
-    Component: PageTwo,
+    path: '/dance/:name',
+    Component: DancePage,
   },
 ];
 

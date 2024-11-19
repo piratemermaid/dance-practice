@@ -19,13 +19,17 @@ export default function NavBar() {
       <Box>
         <HStack>
           {ROUTES.map((route) => {
-            return (
-              <Link to={route.path} key={route.path}>
-                <Button variant="link" sx={{ mr: 4 }}>
-                  {route.label}
-                </Button>
-              </Link>
-            );
+            if (route.label) {
+              return (
+                <Link to={route.path} key={route.path}>
+                  <Button variant="link" sx={{ mr: 4 }}>
+                    {route.label}
+                  </Button>
+                </Link>
+              );
+            } else {
+              return null;
+            }
           })}
         </HStack>
       </Box>
