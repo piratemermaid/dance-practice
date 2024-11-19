@@ -44,10 +44,7 @@ const waltz = {
     },
     {
       name: 'Underarm Turn',
-      notes: [
-        'Start box on 3 -> turn through 6 -> finish box on 3',
-        'Still going forward on 4 -> curve around 5 6 1 -> 2 foot forward -> 3 together and back into box',
-      ],
+      notes: [],
       footwork: [
         {
           count: 3,

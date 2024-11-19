@@ -9,13 +9,13 @@ import {
   Th,
   Tr,
 } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 
 import PageLayout from '../components/PageLayout';
-import { useLocation } from 'react-router-dom';
-import dances from '../data/dances';
 import SectionHeader from '../components/SectionHeader';
 import Section from '../components/Section';
 import YoutubeVideo from '../components/YoutubeVideo';
+import dances from '../data/dances';
 
 export default function DancePage() {
   const location = useLocation();
@@ -46,6 +46,9 @@ export default function DancePage() {
       {danceInfo.steps?.map((step, index) => (
         <Section key={index}>
           <SectionHeader>{step.name}</SectionHeader>
+          {step.description && (
+            <Text sx={{ color: 'purple.100' }}>{step.description}</Text>
+          )}
           <Box>
             {step.notes?.map((note, index) => (
               <Text key={index}>- {note}</Text>
@@ -58,7 +61,7 @@ export default function DancePage() {
                   <Tr key={index}>
                     <Th>{step.count}</Th>
                     <Td>{step.direction}</Td>
-                    <Td>{step.foot} foot</Td>
+                    <Td>{step.foot ? `${step.foot} foot` : ''}</Td>
                     <Td>{step.technique ? `(${step.technique})` : null}</Td>
                   </Tr>
                 ))}
