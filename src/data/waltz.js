@@ -63,7 +63,7 @@ const waltz = {
         { count: 4, foot: 'left', direction: 'back into box step' },
       ],
       videoUrl:
-        'https://www.youtube.com/embed/-ewZ4bWRkVo?si=Cgbn49ibE3gSAN7u&amp;start=9',
+        'https://www.youtube.com/embed/-ewZ4bWRkVo?si=Cgbn49ibE3gSAN7u&amp;start=983',
     },
   ],
 };
