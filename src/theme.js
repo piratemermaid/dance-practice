@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/theme-utils';
 
 const config = {
-  initialColorMode: 'system',
+  initialColorMode: 'dark',
   useSystemColorMode: false,
 };
 
