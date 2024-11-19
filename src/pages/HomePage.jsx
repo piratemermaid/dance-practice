@@ -7,7 +7,7 @@ import dances from '../data/dances';
 export default function HomePage() {
   return (
     <PageLayout title="Dances">
-      <SimpleGrid columns={3} spacing={2}>
+      <SimpleGrid columns={[1, 2, null, 3]} spacing={2}>
         {Object.entries(dances).map(([key, dance]) => (
           <Link to={`/dance/${dance.name}`} key={key}>
             <Card
