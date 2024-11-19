@@ -1,5 +1,6 @@
 import {
   Box,
+  Center,
   Image,
   SimpleGrid,
   Table,
@@ -14,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 import dances from '../data/dances';
 import SectionHeader from '../components/SectionHeader';
 import Section from '../components/Section';
+import YoutubeVideo from '../components/YoutubeVideo';
 
 export default function DancePage() {
   const location = useLocation();
@@ -22,7 +24,13 @@ export default function DancePage() {
 
   const danceInfo = dances[danceName.toLowerCase()];
 
-  console.log('>>', danceInfo);
+  const getColumns = (step) => {
+    let columns = 1;
+    if (step.gifName) columns++;
+    if (step.footwork?.length) columns++;
+
+    return columns;
+  };
 
   return (
     <PageLayout title={danceName}>
@@ -34,93 +42,37 @@ export default function DancePage() {
           ))}
         </Box>
       </Section>
-      <Section>
-        <SectionHeader>Basic</SectionHeader>
-        <SimpleGrid columns={[1, null, 2, 3]} spacing={4}>
-          <Table>
-            {danceInfo.basic.footwork.map((step, index) => (
-              <Tr key={index}>
-                <Th>{step.count}</Th>
-                <Td>{step.direction}</Td>
-                <Td>{step.foot} foot</Td>
-                <Td>{step.technique ? `(${step.technique})` : null}</Td>
-              </Tr>
-            ))}
-          </Table>
+
+      {danceInfo.steps.map((step, index) => (
+        <Section key={index}>
+          <SectionHeader>{step.name}</SectionHeader>
           <Box>
-            {danceInfo.basic.technique.map((technique, index) => (
-              <Text key={index}>{technique}</Text>
+            {step.notes?.map((note, index) => (
+              <Text key={index}>- {note}</Text>
             ))}
-            <Image
-              src={`/images/gifs/${danceName.toLowerCase()}-basic.gif`}
-              alt={danceName}
-              sx={{ ml: 20 }}
-            />
           </Box>
-          <Box>
-            <iframe
-              width="560"
-              height="315"
-              src={danceInfo.basic.videoUrl}
-              title="YouTube video player"
-              //eslint-disable-next-line react/no-unknown-property
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              //eslint-disable-next-line react/no-unknown-property
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </Box>
-        </SimpleGrid>
-      </Section>
+          <SimpleGrid columns={getColumns(step)} spacing={10}>
+            {step.footwork?.length && (
+              <Table>
+                {step.footwork.map((step, index) => (
+                  <Tr key={index}>
+                    <Th>{step.count}</Th>
+                    <Td>{step.direction}</Td>
+                    <Td>{step.foot} foot</Td>
+                    <Td>{step.technique ? `(${step.technique})` : null}</Td>
+                  </Tr>
+                ))}
+              </Table>
+            )}
+            <Center sx={{ my: 4 }}>
+              <YoutubeVideo url={step.videoUrl} />
+            </Center>
+            {step.gifName && (
+              <Image src={`/images/gifs/${step.gifName}.gif`} alt={step.name} />
+            )}
+          </SimpleGrid>
+        </Section>
+      ))}
     </PageLayout>
   );
-
-  //   return (
-  //     <PageLayout title={danceName}>
-  //       <Text>Basic</Text>
-
-  //       <Table>
-  //         <Thead>
-  //           <Tr>
-  //             {danceInfo.basic.footwork.map((step, index) => (
-  //               <Th key={index}>
-  //                 <Text>{step.count}</Text>
-  //                 <Text>{step.foot} foot</Text>
-  //                 <Text>{step.direction}</Text>
-  //                 <Text>{step.technique ? `(${step.technique})` : null}</Text>
-  //               </Th>
-  //             ))}
-  //           </Tr>
-  //         </Thead>
-  //         <Tbody>
-  //           {danceInfo.basic.footwork.map((step, index) => (
-  //             <>
-  //               <Tr>
-  //                 <Th>{step.count}</Th>
-  //               </Tr>
-  //               <Tr>
-  //                 <Td key={index} sx={{}}>
-  //                   <Text>{step.foot} foot</Text>
-  //                   <Text>{step.direction}</Text>
-  //                   <Text>{step.technique ? `(${step.technique})` : null}</Text>
-  //                 </Td>
-  //               </Tr>
-  //             </>
-  //           ))}
-  //         </Tbody>
-  //       </Table>
-  //       {/* {danceInfo.basic.footwork.map((step, index) => (
-  //           <Tr key={index}>
-  //             <Td>{step.foot}</Td>
-  //             <Td>{step.direction}</Td>
-  //             <Td>{step.technique}</Td>
-  //           </Tr>
-  //         ))} */}
-  //       <Image
-  //         src={`/images/gifs/${danceName.toLowerCase()}-basic.gif`}
-  //         alt={danceName}
-  //       />
-  //     </PageLayout>
-  //   );
 }
