@@ -26,14 +26,16 @@ export default function DancePage() {
 
   return (
     <PageLayout title={danceName}>
-      <Section>
-        <SectionHeader>Frame</SectionHeader>
-        <Box>
-          {danceInfo.frame?.map((frameNote, index) => (
-            <Text key={index}>{frameNote}</Text>
-          ))}
-        </Box>
-      </Section>
+      {danceInfo.frame && (
+        <Section>
+          <SectionHeader>Frame</SectionHeader>
+          <Box>
+            {danceInfo.frame?.map((frameNote, index) => (
+              <Text key={index}>{frameNote}</Text>
+            ))}
+          </Box>
+        </Section>
+      )}
 
       {danceInfo.steps?.map((step, index) => (
         <Section key={index}>
